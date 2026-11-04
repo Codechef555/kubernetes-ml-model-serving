@@ -27,3 +27,6 @@ MODEL_DIR = PROJECT_ROOT / "ml"
 DATASET_PATH = DATA_DIR / "customer_churn.csv"
 MODEL_PATH = MODEL_DIR / "model.pkl"
 METRICS_PATH = MODEL_DIR / "metrics.json"
+
+TARGET_COLUMN = "Churn"
+RANDOM_STATE = 42
