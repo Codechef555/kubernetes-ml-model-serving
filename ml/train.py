@@ -30,3 +30,6 @@ METRICS_PATH = MODEL_DIR / "metrics.json"
 
 TARGET_COLUMN = "Churn"
 RANDOM_STATE = 42
+
+
+def load_dataset(dataset_path: Path) -> pd.DataFrame:
