@@ -33,3 +33,9 @@ RANDOM_STATE = 42
 
 
 def load_dataset(dataset_path: Path) -> pd.DataFrame:
+    """Load the customer churn dataset."""
+    if not dataset_path.exists():
+        raise FileNotFoundError(
+            f"Dataset not found: {dataset_path}\n"
+            "Place customer_churn.csv inside the data/ directory."
+        )
