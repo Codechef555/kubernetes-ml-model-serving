@@ -112,3 +112,9 @@ def preprocess_dataset(dataframe: pd.DataFrame):
         transformers.append(
             ("categorical", categorical_pipeline, categorical_features)
         )
+    
+    if not transformers:
+        raise ValueError("No supported numerical or categorical features found.")
+
+    preprocessor = ColumnTransformer(transformers=transformers)
+    
