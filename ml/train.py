@@ -73,3 +73,6 @@ def preprocess_dataset(dataframe: pd.DataFrame):
 
     if dataframe[TARGET_COLUMN].nunique() != 2:
         raise ValueError("The target column must contain both churn classes.")
+
+    X = dataframe.drop(columns=[TARGET_COLUMN])
+    y = dataframe[TARGET_COLUMN].astype(int)
