@@ -100,3 +100,15 @@ def preprocess_dataset(dataframe: pd.DataFrame):
         transformers.append(
             ("numerical", numerical_pipeline, numerical_features)
         )
+    
+    if categorical_features:
+        categorical_pipeline = Pipeline(
+            steps=[
+                ("imputer", SimpleImputer(strategy="most_frequent")),
+                ("encoder", OneHotEncoder(handle_unknown="ignore")),
+            ]
+        )
+
+        transformers.append(
+            ("categorical", categorical_pipeline, categorical_features)
+        )
