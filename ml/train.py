@@ -89,3 +89,14 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     ).columns.tolist()
 
     transformers = []
+    if numerical_features:
+        numerical_pipeline = Pipeline(
+            steps=[
+                ("imputer", SimpleImputer(strategy="median")),
+                ("scaler", StandardScaler()),
+            ]
+        )
+
+        transformers.append(
+            ("numerical", numerical_pipeline, numerical_features)
+        )
