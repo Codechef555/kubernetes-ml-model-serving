@@ -87,3 +87,5 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     categorical_features = X.select_dtypes(
         include=["object", "category", "bool"]
     ).columns.tolist()
+
+    transformers = []
