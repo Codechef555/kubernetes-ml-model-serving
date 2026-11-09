@@ -70,3 +70,6 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     )
 
     dataframe.dropna(subset=[TARGET_COLUMN], inplace=True)
+
+    if dataframe[TARGET_COLUMN].nunique() != 2:
+        raise ValueError("The target column must contain both churn classes.")
