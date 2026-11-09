@@ -79,3 +79,7 @@ def preprocess_dataset(dataframe: pd.DataFrame):
 
     if X.empty or X.shape[1] == 0:
         raise ValueError("The dataset contains no usable features.")
+    
+    numerical_features = X.select_dtypes(
+        include=["int64", "float64", "int32", "float32"]
+    ).columns.tolist()
