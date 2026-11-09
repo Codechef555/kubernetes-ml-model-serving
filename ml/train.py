@@ -60,3 +60,11 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     for identifier in ("customerID", "CustomerID", "customer_id"):
         if identifier in dataframe.columns:
             dataframe.drop(columns=[identifier], inplace=True)
+
+    dataframe[TARGET_COLUMN] = (
+        dataframe[TARGET_COLUMN]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .map({"yes": 1, "no": 0})
+    )
