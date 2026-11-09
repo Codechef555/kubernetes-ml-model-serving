@@ -76,3 +76,6 @@ def preprocess_dataset(dataframe: pd.DataFrame):
 
     X = dataframe.drop(columns=[TARGET_COLUMN])
     y = dataframe[TARGET_COLUMN].astype(int)
+
+    if X.empty or X.shape[1] == 0:
+        raise ValueError("The dataset contains no usable features.")
