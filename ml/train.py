@@ -68,3 +68,5 @@ def preprocess_dataset(dataframe: pd.DataFrame):
         .str.lower()
         .map({"yes": 1, "no": 0})
     )
+
+    dataframe.dropna(subset=[TARGET_COLUMN], inplace=True)
