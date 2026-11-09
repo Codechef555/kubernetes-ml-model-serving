@@ -151,5 +151,11 @@ def train_model(X, y, preprocessor):
     predictions = model_pipeline.predict(X_test)
 
     return model_pipeline, y_test, predictions
+    
+def evaluate_model(y_test, predictions) -> dict:
+
+
+
+
 
 
