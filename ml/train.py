@@ -39,3 +39,15 @@ def load_dataset(dataset_path: Path) -> pd.DataFrame:
             f"Dataset not found: {dataset_path}\n"
             "Place customer_churn.csv inside the data/ directory."
         )
+    
+    dataframe = pd.read_csv(dataset_path)
+
+    if dataframe.empty:
+        raise ValueError("The dataset is empty.")
+
+    if TARGET_COLUMN not in dataframe.columns:
+        raise ValueError(
+            f"Target column '{TARGET_COLUMN}' not found in dataset."
+        )
+
+    return dataframe
