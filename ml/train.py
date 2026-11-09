@@ -83,3 +83,7 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     numerical_features = X.select_dtypes(
         include=["int64", "float64", "int32", "float32"]
     ).columns.tolist()
+
+    categorical_features = X.select_dtypes(
+        include=["object", "category", "bool"]
+    ).columns.tolist()
