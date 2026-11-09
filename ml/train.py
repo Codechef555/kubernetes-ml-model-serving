@@ -121,5 +121,13 @@ def preprocess_dataset(dataframe: pd.DataFrame):
     return X, y, preprocessor
 
 def train_model(X, y, preprocessor):
-    
+    """Train a Random Forest classification pipeline."""
+    if y.value_counts().min() < 2:
+        raise ValueError(
+            "Each churn class must contain at least two samples "
+            "for stratified train/test splitting."
+        )
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y)
+
 
