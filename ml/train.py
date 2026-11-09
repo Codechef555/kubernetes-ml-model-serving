@@ -117,4 +117,6 @@ def preprocess_dataset(dataframe: pd.DataFrame):
         raise ValueError("No supported numerical or categorical features found.")
 
     preprocessor = ColumnTransformer(transformers=transformers)
-    
+
+    return X, y, preprocessor
+
