@@ -120,3 +120,6 @@ def preprocess_dataset(dataframe: pd.DataFrame):
 
     return X, y, preprocessor
 
+def train_model(X, y, preprocessor):
+    
+
