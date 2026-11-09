@@ -51,3 +51,8 @@ def load_dataset(dataset_path: Path) -> pd.DataFrame:
         )
 
     return dataframe
+
+def preprocess_dataset(dataframe: pd.DataFrame):
+    """Separate features and target and prepare preprocessing pipelines."""
+    dataframe = dataframe.copy()
+    
