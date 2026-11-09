@@ -55,4 +55,8 @@ def load_dataset(dataset_path: Path) -> pd.DataFrame:
 def preprocess_dataset(dataframe: pd.DataFrame):
     """Separate features and target and prepare preprocessing pipelines."""
     dataframe = dataframe.copy()
-    
+
+    # Remove customer identifiers because they do not predict churn.
+    for identifier in ("customerID", "CustomerID", "customer_id"):
+        if identifier in dataframe.columns:
+            dataframe.drop(columns=[identifier], inplace=True)
