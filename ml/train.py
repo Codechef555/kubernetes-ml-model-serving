@@ -148,4 +148,6 @@ def train_model(X, y, preprocessor):
     )
     model_pipeline.fit(X_train, y_train)
 
+    predictions = model_pipeline.predict(X_test)
+
 
