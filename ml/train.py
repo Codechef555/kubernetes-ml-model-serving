@@ -180,6 +180,8 @@ def evaluate_model(y_test, predictions) -> dict:
 
     return metrics
 
+def save_artifacts(model, metrics: dict) -> None:
+    
 
 
 
