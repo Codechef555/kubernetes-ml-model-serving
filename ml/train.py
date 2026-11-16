@@ -153,6 +153,32 @@ def train_model(X, y, preprocessor):
     return model_pipeline, y_test, predictions
     
 def evaluate_model(y_test, predictions) -> dict:
+    """Calculate classification performance metrics."""
+    metrics = {
+        "accuracy": round(accuracy_score(y_test, predictions), 4),
+        "precision": round(
+            precision_score(y_test, predictions, zero_division=0), 4
+        ),
+        "recall": round(
+            recall_score(y_test, predictions, zero_division=0), 4
+        ),
+        "f1_score": round(
+            f1_score(y_test, predictions, zero_division=0), 4
+        ),
+        "confusion_matrix": confusion_matrix(
+            y_test, predictions
+        ).tolist(),
+        "classification_report": classification_report(
+            y_test,
+            predictions,
+            labels=[0, 1],
+            target_names=["No Churn", "Churn"],
+            output_dict=True,
+            zero_division=0,
+        ),
+    }
+
+    return metrics
 
 
 
