@@ -181,7 +181,16 @@ def evaluate_model(y_test, predictions) -> dict:
     return metrics
 
 def save_artifacts(model, metrics: dict) -> None:
-    
+    """Save the trained model and evaluation metrics."""
+    MODEL_DIR.mkdir(parents=True, exist_ok=True)
+
+    joblib.dump(model, MODEL_PATH)
+
+    with METRICS_PATH.open("w", encoding="utf-8") as file:
+        json.dump(metrics, file, indent=4)
+
+    print(f"\nModel saved successfully: {MODEL_PATH}")
+    print(f"Metrics saved successfully: {METRICS_PATH}")
 
 
 
