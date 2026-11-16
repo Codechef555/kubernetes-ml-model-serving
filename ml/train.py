@@ -192,6 +192,43 @@ def save_artifacts(model, metrics: dict) -> None:
     print(f"\nModel saved successfully: {MODEL_PATH}")
     print(f"Metrics saved successfully: {METRICS_PATH}")
 
+def main() -> None:
+    """Execute the complete model training workflow."""
+    print("=" * 60)
+    print("CUSTOMER CHURN MODEL TRAINING")
+    print("=" * 60)
+
+    print("\n[1/5] Loading dataset...")
+    dataframe = load_dataset(DATASET_PATH)
+    print(f"Dataset shape: {dataframe.shape}")
+
+    print("\n[2/5] Preprocessing dataset...")
+    X, y, preprocessor = preprocess_dataset(dataframe)
+    print(f"Features: {X.shape[1]}")
+    print(f"Training samples: {len(X)}")
+
+    print("\n[3/5] Training Random Forest model...")
+    model, y_test, predictions = train_model(
+        X, y, preprocessor
+    )
+    print("Model training completed.")
+
+    print("\n[4/5] Evaluating model...")
+    metrics = evaluate_model(y_test, predictions)
+
+    print(f"Accuracy:  {metrics['accuracy']:.2%}")
+    print(f"Precision: {metrics['precision']:.2%}")
+    print(f"Recall:    {metrics['recall']:.2%}")
+    print(f"F1-score:  {metrics['f1_score']:.2%}")
+
+    print("\n[5/5] Saving model artifacts...")
+    save_artifacts(model, metrics)
+
+    print("\nTraining pipeline completed successfully.")
+
+
+if __name__ == "__main__":
+    main()
 
 
 
