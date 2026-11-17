@@ -71,3 +71,11 @@ app = FastAPI(
 
 # Expose Prometheus metrics at /metrics
 app.mount("/metrics", make_asgi_app())
+
+@app.get("/", response_model=HealthResponse, tags=["General"])
+async def root():
+    """Return the API welcome message."""
+    return HealthResponse(
+        status="success",
+        message="Customer Churn Prediction API is running.",
+    )
