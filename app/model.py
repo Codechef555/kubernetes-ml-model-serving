@@ -29,3 +29,7 @@ class ChurnPredictionModel:
             raise RuntimeError(
                 f"Failed to load the trained model: {exc}"
             ) from exc
+    
+    def is_loaded(self) -> bool:
+        """Check whether the model is loaded."""
+        return self.model is not None
