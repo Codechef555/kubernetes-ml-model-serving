@@ -40,3 +40,20 @@ PREDICTION_LATENCY = Histogram(
     "prediction_latency_seconds",
     "Time taken to generate customer churn predictions",
 )
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Load the trained model when the application starts."""
+    try:
+        churn_model.load_model()
+        print("Customer churn model loaded successfully.")
+    except Exception as exc:
+        print(f"Model loading failed: {exc}")
+        raise RuntimeError(
+            "Application startup failed because the ML model "
+            "could not be loaded."
+        ) from exc
+
+    yield
+
+    print("Customer churn API shutting down.")
