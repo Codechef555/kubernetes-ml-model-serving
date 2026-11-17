@@ -91,3 +91,22 @@ async def health_check():
         status="healthy",
         message="Application is running.",
     )
+
+@app.get("/ready", response_model=HealthResponse, tags=["Health"])
+async def readiness_check():
+    """
+    Readiness endpoint.
+
+    Indicates whether the trained ML model is available
+    to serve prediction requests.
+    """
+    if not churn_model.is_loaded():
+        raise HTTPException(
+            status_code=503,
+            detail="Application is not ready. Model is not loaded.",
+        )
+
+    return HealthResponse(
+        status="ready",
+        message="Application and ML model are ready.",
+    )
