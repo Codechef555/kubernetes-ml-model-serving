@@ -79,3 +79,15 @@ async def root():
         status="success",
         message="Customer Churn Prediction API is running.",
     )
+
+@app.get("/health", response_model=HealthResponse, tags=["Health"])
+async def health_check():
+    """
+    Liveness endpoint.
+
+    Indicates whether the API process is running.
+    """
+    return HealthResponse(
+        status="healthy",
+        message="Application is running.",
+    )
