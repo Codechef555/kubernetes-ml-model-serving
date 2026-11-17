@@ -57,3 +57,14 @@ async def lifespan(app: FastAPI):
     yield
 
     print("Customer churn API shutting down.")
+
+# Initialize FastAPI application
+app = FastAPI(
+    title=APP_NAME,
+    description=(
+        "Machine learning API for predicting customer churn "
+        "using a trained Random Forest classification model."
+    ),
+    version=APP_VERSION,
+    lifespan=lifespan,
+)
