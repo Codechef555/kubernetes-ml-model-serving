@@ -84,3 +84,6 @@ class ChurnPredictionModel:
             raise RuntimeError(
                 f"Customer churn prediction failed: {exc}"
             ) from exc
+
+# Reusable model instance for the FastAPI application.
+churn_model = ChurnPredictionModel()
