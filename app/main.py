@@ -19,3 +19,8 @@ from app.schemas import (
     ModelInfoResponse,
     PredictionResponse,
 )
+
+# Application configuration
+APP_NAME = "Customer Churn Prediction API"
+APP_VERSION = "1.0.0"
+MODEL_NAME = "RandomForestClassifier"
