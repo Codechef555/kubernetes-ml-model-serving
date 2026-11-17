@@ -177,3 +177,16 @@ async def predict_churn(customer: CustomerFeatures):
             status_code=500,
             detail=f"Prediction failed: {str(exc)}",
         ) from exc
+
+@app.get("/metrics-info", tags=["Monitoring"])
+async def metrics_information():
+    """Provide information about the available monitoring endpoint."""
+    return {
+        "metrics_endpoint": "/metrics",
+        "available_metrics": [
+            "prediction_requests_total",
+            "prediction_errors_total",
+            "prediction_latency_seconds",
+        ],
+        "monitoring": "Prometheus",
+    }
