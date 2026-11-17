@@ -35,3 +35,8 @@ PREDICTION_ERRORS = Counter(
     "prediction_errors_total",
     "Total number of failed prediction requests",
 )
+
+PREDICTION_LATENCY = Histogram(
+    "prediction_latency_seconds",
+    "Time taken to generate customer churn predictions",
+)
