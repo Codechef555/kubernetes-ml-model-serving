@@ -68,3 +68,6 @@ app = FastAPI(
     version=APP_VERSION,
     lifespan=lifespan,
 )
+
+# Expose Prometheus metrics at /metrics
+app.mount("/metrics", make_asgi_app())
