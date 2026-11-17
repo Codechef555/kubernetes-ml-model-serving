@@ -130,3 +130,50 @@ async def model_information():
         target_column="Churn",
         supported_predictions=["Churn", "No Churn"],
     )
+
+@app.post(
+    "/predict",
+    response_model=PredictionResponse,
+    tags=["Prediction"],
+)
+async def predict_churn(customer: CustomerFeatures):
+    """
+    Predict whether a customer is likely to churn.
+
+    Accepts validated customer information and returns
+    the predicted churn class and probability.
+    """
+    if not churn_model.is_loaded():
+        raise HTTPException(
+            status_code=503,
+            detail="ML model is not available.",
+        )
+
+    PREDICTION_REQUESTS.inc()
+
+    try:
+        with PREDICTION_LATENCY.time():
+            result = churn_model.predict(
+                customer.model_dump()
+            )
+
+        prediction = result["prediction"]
+
+        return PredictionResponse(
+            prediction=prediction,
+            churn_probability=result["churn_probability"],
+            confidence=result["confidence"],
+            message=(
+                "Customer is likely to churn."
+                if prediction == "Churn"
+                else "Customer is unlikely to churn."
+            ),
+        )
+
+    except Exception as exc:
+        PREDICTION_ERRORS.inc()
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Prediction failed: {str(exc)}",
+        ) from exc
