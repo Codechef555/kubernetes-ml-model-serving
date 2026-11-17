@@ -7,3 +7,7 @@ endpoints for Kubernetes-based machine learning model serving.
 
 from contextlib import asynccontextmanager
 from pathlib import Path
+
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from prometheus_client import Counter, Histogram, make_asgi_app
