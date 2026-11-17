@@ -110,3 +110,23 @@ async def readiness_check():
         status="ready",
         message="Application and ML model are ready.",
     )
+
+@app.get(
+    "/model-info",
+    response_model=ModelInfoResponse,
+    tags=["Model"],
+)
+async def model_information():
+    """Return information about the deployed ML model."""
+    if not churn_model.is_loaded():
+        raise HTTPException(
+            status_code=503,
+            detail="ML model is not loaded.",
+        )
+
+    return ModelInfoResponse(
+        model_name=MODEL_NAME,
+        model_status="loaded",
+        target_column="Churn",
+        supported_predictions=["Churn", "No Churn"],
+    )
