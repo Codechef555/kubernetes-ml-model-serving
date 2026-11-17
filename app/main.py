@@ -24,3 +24,9 @@ from app.schemas import (
 APP_NAME = "Customer Churn Prediction API"
 APP_VERSION = "1.0.0"
 MODEL_NAME = "RandomForestClassifier"
+
+# Prometheus metrics
+PREDICTION_REQUESTS = Counter(
+    "prediction_requests_total",
+    "Total number of prediction requests",
+)
