@@ -30,3 +30,8 @@ PREDICTION_REQUESTS = Counter(
     "prediction_requests_total",
     "Total number of prediction requests",
 )
+
+PREDICTION_ERRORS = Counter(
+    "prediction_errors_total",
+    "Total number of failed prediction requests",
+)
